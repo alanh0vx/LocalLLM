@@ -1,0 +1,23 @@
+# Ignore the private configuration file (do not push your actual config)
+config.json
+
+# Ignore Python bytecode and caches
+*.py[cod]
+__pycache__/
+
+# Ignore virtual environment directories
+venv/
+ENV/
+.env/
+
+# Ignore build artifacts
+*.egg-info/
+dist/
+build/
+
+# Ignore log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db

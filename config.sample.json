@@ -1,0 +1,6 @@
+{
+    "MODEL_ID": "meta-llama/Llama-3.1-8B",
+    "HF_TOKEN": "YOUR_HUGGING_FACE_TOKEN_HERE",
+    "CACHE_DIR": "D:\\development\\huggingface"
+  }
+  
