@@ -5,6 +5,9 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from sentence_transformers import SentenceTransformer, util
 
+import warnings
+warnings.filterwarnings("ignore")
+
 # === Load Configuration from config.json ===
 CONFIG_PATH = "config.json"
 if os.path.exists(CONFIG_PATH):
@@ -100,7 +103,7 @@ def generate_final_answer(best_header: str, best_content: str, user_name: str, u
         )
 
     inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-    extra_tokens = 50
+    extra_tokens = 100
     input_length = inputs.input_ids.shape[1]
     max_length = input_length + extra_tokens
 
