@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ bot_name }} - Bank Helpdesk Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: #f9f9f9;
+        }
+        #chatbox {
+            max-width: 600px; 
+            margin: 0 auto;
+        }
+        #messages {
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            height: 400px; 
+            overflow-y: scroll; 
+            background: #fff;
+        }
+        .message {
+            margin: 10px 0; 
+            padding: 10px; 
+            border-radius: 5px;
+        }
+        .user {
+            background-color: #e1ffc7; 
+            text-align: right;
+        }
+        .bot {
+            background-color: #f0f0f0; 
+            text-align: left;
+        }
+        .loading {
+            font-style: italic;
+            color: #888;
+        }
+        input[type="text"], select {
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 10px;
+        }
+        #topic-select {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <h2>{{ bot_name }} - Bank Helpdesk Chatbot</h2>
+        <div id="user-info">
+            <label for="user_name">Enter your name:</label>
+            <input type="text" id="user_name" placeholder="Your name" value="">
+            <button id="start_chat">Start Chat</button>
+        </div>
+        <div id="messages" style="display:none;"></div>
+        <div id="chat_input" style="display:none;">
+            <!-- Dropdown to select a bank topic -->
+            <div id="topic-select">
+                <label for="bank_topic">Select a topic you want to know more about:</label>
+                <select id="bank_topic">
+                    <option value="">-- Select a Topic (optional) --</option>
+                    {% for topic in bank_topics %}
+                        <option value="{{ topic }}">{{ topic|capitalize }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- Chat input -->
+            <input type="text" id="user_input" placeholder="Type your message here...">
+            <button id="send">Send</button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            // When the user clicks "Start Chat"
+            $("#start_chat").click(function(){
+                var userName = $("#user_name").val().trim();
+                if (userName === "") {
+                    alert("Please enter your name.");
+                    return;
+                }
+                // Disable the name input and button; show chat interface
+                $("#start_chat").prop("disabled", true);
+                $("#user_name").prop("disabled", true);
+                $("#messages").show();
+                $("#chat_input").show();
+                // Greet the user
+                $("#messages").append('<div class="message bot"><strong>{{ bot_name }}:</strong> Hello ' + userName + '! How can I assist you today?</div>');
+            });
+            
+            // When the user selects a topic, pre-populate the chat input
+            $("#bank_topic").change(function(){
+                var selectedTopic = $(this).val();
+                if(selectedTopic){
+                    // Pre-populate with a default question text
+                    var defaultText = "I want to know more about " + selectedTopic + ".";
+                    $("#user_input").val(defaultText);
+                }
+            });
+            
+            // Function to send the message
+            function sendMessage() {
+                var userName = $("#user_name").val().trim() || "User";
+                var userInput = $("#user_input").val().trim();
+                if(userInput === "") return;
+                
+                // Append the user's message to the chat history
+                $("#messages").append('<div class="message user"><strong>' + userName + ':</strong> ' + userInput + '</div>');
+                $("#user_input").val("");
+                
+                // Append a loading indicator while the bot is thinking
+                var loadingMsg = $('<div class="message bot loading"><strong>{{ bot_name }}:</strong> Bot is thinking...</div>');
+                $("#messages").append(loadingMsg);
+                $("#messages").scrollTop($("#messages")[0].scrollHeight);
+                
+                // Send AJAX request to /chat
+                $.ajax({
+                    url: "/chat",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ user_name: userName, user_input: userInput }),
+                    success: function(response){
+                        // Remove the loading message
+                        loadingMsg.remove();
+                        // Replace newline characters with <br> tags for HTML formatting
+                        var botResponse = response.response.replace(/\n/g, "<br>");
+                        $("#messages").append('<div class="message bot"><strong>{{ bot_name }}:</strong> ' + botResponse + '</div>');
+                        $("#messages").scrollTop($("#messages")[0].scrollHeight);
+                    },
+                    error: function(){
+                        loadingMsg.remove();
+                        $("#messages").append('<div class="message bot"><strong>{{ bot_name }}:</strong> Oops! There was an error processing your request.</div>');
+                    }
+                });
+            }
+            
+            // Send message on button click
+            $("#send").click(function(){
+                sendMessage();
+            });
+            
+            // Allow pressing Enter to send the message
+            $("#user_input").keypress(function(e){
+                if(e.which === 13){
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
