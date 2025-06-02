@@ -13,17 +13,11 @@ This project is a **privacy-preserving AI chatbot** that runs **entirely on your
 ### 1. Clone This Repository
 
 ```bash
-git clone https://github.com/yourusername/local-llm-bank-chatbot.git
-cd local-llm-bank-chatbot
+git clone https://github.com/alanh0vx/LocalLLM
+cd LocalLLM
 ```
 
 ### 2. Install Python Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-If `requirements.txt` is missing, install manually:
 
 ```bash
 pip install llama-cpp-python flask sentence-transformers
