@@ -1,6 +1,3 @@
-# Ignore the private configuration file (do not push your actual config)
-config.json
-
 # Ignore Python bytecode and caches
 *.py[cod]
 __pycache__/
