@@ -4,7 +4,7 @@ import random
 import warnings
 from flask import Flask, render_template, request, jsonify
 from llama_cpp import Llama
-from sentence_transformers import SentenceTransformer, util
+from sentence_transformers import SentenceTransformer
 
 warnings.filterwarnings("ignore")
 app = Flask(__name__)
@@ -48,10 +48,10 @@ def generate_final_answer(user_name: str, user_query: str) -> str:
     all_sections_text = "\n\n".join([f"{k}: {v}" for k, v in bank_sections.items()])
 
     system_prompt = (
-        "[System]: You are a helpful bank helpdesk assistant. "
+        "You are a helpful bank helpdesk assistant. "
         "You are only allowed to answer questions strictly related to banking. "
         "You must only respond using the content provided in the helpdesk manual below.\n\n"
-        f"[Bank Helpdesk Manual]:\n{all_sections_text}\n\n"
+        f"{all_sections_text}\n\n"
     )
 
     prompt = (
@@ -61,7 +61,7 @@ def generate_final_answer(user_name: str, user_query: str) -> str:
     )
 
     response = llm(prompt, max_tokens=200, temperature=0.5, top_p=0.95,
-                   stop=["User:", "Assistant:", "Section:", "[System]:", "[Bank Helpdesk Manual]:"])
+                   stop=["User:", "Assistant:", "Section:"])
     return response["choices"][0]["text"].strip()
 
 
