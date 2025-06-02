@@ -33,20 +33,22 @@ This project uses **quantized local models** in `.gguf` format.
 
 ### Example Models:
 
-| Model ID                 | Path                                                                 |
-|--------------------------|----------------------------------------------------------------------|
-| `gemma-3-4b-it`          | `D:/development/llm-models/.../gemma-3-4b-it-Q4_K_M.gguf`             |
-| `deepseek-r1-qwen3-8b`   | `D:/development/llm-models/.../DeepSeek-R1-0528-Qwen3-8B-Q4_K_M.gguf` |
+| Model ID                 | Path                                                                   |
+|--------------------------|------------------------------------------------------------------------|
+| `gemma-3-4b-it`          | `D:/development/llm-models/.../gemma-3-4b-it-Q4_K_M.gguf`              |
+| `deepseek-r1-qwen3-8b`   | `D:/development/llm-models/.../DeepSeek-R1-0528-Qwen3-8B-Q4_K_M.gguf`  |
+| `Meta-Llama-3.1-8B`      | `D:/development/llm-models/.../Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf` |
 
 Define these in `config.json` like this:
 
 ```json
 {
   "models": {
-    "gemma-3-4b-it": "D:/path/to/gemma-3-4b-it-Q4_K_M.gguf",
-    "deepseek-r1-qwen3-8b": "D:/path/to/DeepSeek-R1-0528-Qwen3-8B-Q4_K_M.gguf"
+    "gemma-3-4b-it": "D:/development/llm-models/lmstudio-community/gemma-3-4b-it-GGUF/gemma-3-4b-it-Q4_K_M.gguf",
+    "deepseek-r1-qwen3-8b": "D:/development/llm-models/lmstudio-community/DeepSeek-R1-0528-Qwen3-8B-GGUF/DeepSeek-R1-0528-Qwen3-8B-Q4_K_M.gguf",
+    "Meta-Llama-3.1-8B": "D:/development/llm-models/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
   },
-  "default_model": "gemma-3-4b-it"
+  "default_model": "Meta-Llama-3.1-8B"
 }
 ```
 
