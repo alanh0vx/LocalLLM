@@ -105,7 +105,3 @@ This project can be used to simulate and test:
 | `bank_content.json` | Banking domain knowledge base                |
 
 ---
-
-## Using with LM Studio
-
-If you prefer using a graphical interface, LM Studio allows you to download and run GGUF models locally with a convenient UI. To integrate LM Studio with this chatbot, simply configure LM Studio to expose an OpenAI-compatible API (via Settings > Server > Enable API Server). 
