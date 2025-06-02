@@ -104,5 +104,12 @@ This project can be used to simulate and test:
 | `index.html`        | Chat frontend (Bootstrap UI)                 |
 | `config.json`       | LLM configuration (GGUF paths and default)   |
 | `bank_content.json` | Banking domain knowledge base                |
+| `agent.py`          | AI agent to use tools                        |
 
 ---
+
+## Local AI Agent with LM Studio API
+This project supports running fully local AI agents using LM Studio, which serves quantized GGUF models through a local OpenAI-compatible API (http://localhost:1234/v1). 
+
+
+In `agent.py`, we use the SmolAgents framework with OpenAIServerModel to connect to LM Studio, allowing users to interact with tools like DuckDuckGoSearchTool and custom logic via a conversational interface. On startup, the script fetches all currently loaded models from the LM Studio API and lets the user select one for inference. The selected model is then used by a CodeAgent to reason and act using both LLM reasoning and real-time tool usage.
