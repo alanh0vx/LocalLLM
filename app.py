@@ -4,9 +4,12 @@ import random
 import warnings
 from flask import Flask, render_template, request, jsonify
 from llama_cpp import Llama
-from sentence_transformers import SentenceTransformer
 
-warnings.filterwarnings("ignore")
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 app = Flask(__name__)
 
 # === Load Configuration from config.json ===
@@ -24,9 +27,10 @@ default_model_id = config.get("default_model", next(iter(models)))
 current_model_id = default_model_id
 llm = Llama(
     model_path=models[current_model_id],
-    n_ctx=2048,
+    n_ctx=4096,
     n_threads=6,
     n_batch=128,
+    n_gpu_layers=32,
     verbose=False
 )
 
@@ -41,8 +45,6 @@ if os.path.exists(BANK_CONTENT_PATH):
 else:
     bank_sections = {"General": "No bank content provided."}
 
-# --- Load SentenceTransformer ---
-embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
 def generate_final_answer(user_name: str, user_query: str) -> str:
     all_sections_text = "\n\n".join([f"{k}: {v}" for k, v in bank_sections.items()])
@@ -88,6 +90,7 @@ def chat():
             n_ctx=2048,
             n_threads=6,
             n_batch=128,
+            n_gpu_layers=32,
             verbose=False
         )
         current_model_id = model_id
@@ -115,4 +118,4 @@ def chat():
 
 # --- Run the app ---
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)

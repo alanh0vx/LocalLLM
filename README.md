@@ -20,7 +20,7 @@ cd LocalLLM
 ### 2. Install Python Dependencies
 
 ```bash
-pip install llama-cpp-python flask sentence-transformers
+pip install llama-cpp-python flask
 ```
 
 For GPU support with `llama-cpp-python`, see [llama-cpp-python build instructions](https://github.com/abetlen/llama-cpp-python#installation).

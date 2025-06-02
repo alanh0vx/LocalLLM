@@ -1,6 +1,10 @@
 import json
 from llama_cpp import Llama
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
 # Load configuration
 with open("config.json", "r") as f:
     config = json.load(f)
@@ -25,9 +29,10 @@ print(f"Loading model: {selected_model_id}")
 # Load GGUF model
 llm = Llama(
     model_path=model_path,
-    n_ctx=2048,
+    n_ctx=4096,
     n_threads=6,
     n_batch=128,
+    n_gpu_layers=32,
     verbose=False
 )
 
