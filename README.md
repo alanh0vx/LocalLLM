@@ -1,4 +1,4 @@
-# Bank Chatbot with Local LLMs (GGUF + llama.cpp + Flask)
+# Chatbot and AI Agent with Local LLMs 
 
 This project is a **privacy-preserving AI chatbot** that runs **entirely on your local machine**, powered by **GGUF-format LLMs** via `llama-cpp-python`. It includes:
 
