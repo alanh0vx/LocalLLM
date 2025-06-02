@@ -50,8 +50,6 @@ Define these in `config.json` like this:
 }
 ```
 
-You can download `.gguf` models from [TheBloke on Hugging Face](https://huggingface.co/TheBloke).
-
 ---
 
 ## How to Run
@@ -90,7 +88,8 @@ This project can be used to simulate and test:
 - Hallucination and output control
 - OWASP Top 10 for LLM Applications (LLM01–LLM10)
 
-![image](https://github.com/user-attachments/assets/f5933ca1-99b5-49fc-82aa-924d07281f5a)
+![image](https://github.com/user-attachments/assets/aeea56a6-6419-42eb-8231-17eac490c053)
+
 
 ---
 
