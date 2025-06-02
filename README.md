@@ -90,6 +90,8 @@ This project can be used to simulate and test:
 - Hallucination and output control
 - OWASP Top 10 for LLM Applications (LLM01–LLM10)
 
+![image](https://github.com/user-attachments/assets/f5933ca1-99b5-49fc-82aa-924d07281f5a)
+
 ---
 
 ## Files Overview
@@ -107,5 +109,3 @@ This project can be used to simulate and test:
 ## Using with LM Studio
 
 If you prefer using a graphical interface, LM Studio allows you to download and run GGUF models locally with a convenient UI. To integrate LM Studio with this chatbot, simply configure LM Studio to expose an OpenAI-compatible API (via Settings > Server > Enable API Server). 
-
-Then, modify the backend code to send requests to http://localhost:1234/v1/chat/completions instead of using llama-cpp-python. This allows your chatbot to work with models hosted in LM Studio while keeping all data local.
