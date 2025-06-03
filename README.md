@@ -125,8 +125,10 @@ This project supports running fully local AI agents using LM Studio, which serve
 
 In `agent.py`, we use the SmolAgents framework with OpenAIServerModel to connect to LM Studio, allowing users to interact with tools like DuckDuckGoSearchTool and custom logic via a conversational interface. On startup, the script fetches all currently loaded models from the LM Studio API and lets the user select one for inference. The selected model is then used by a CodeAgent to reason and act using both LLM reasoning and real-time tool usage.
 
-![image](https://github.com/user-attachments/assets/4204d871-031e-4a0c-be9b-5eb648fe0f3b)
+![image](https://github.com/user-attachments/assets/09264040-ffd3-44e0-9a8e-14611e452c50)
 
-![image](https://github.com/user-attachments/assets/bd62627b-2e84-4aed-8929-dfc94310be2c)
+![image](https://github.com/user-attachments/assets/b8479027-e54a-4b75-8940-9a0e35f60799)
+
+---
 
 
