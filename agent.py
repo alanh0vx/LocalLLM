@@ -2,7 +2,7 @@ import os
 import requests
 from smolagents import OpenAIServerModel, CodeAgent, DuckDuckGoSearchTool, tool
 
-LM_STUDIO_API_BASE = "http://localhost:1234"
+LM_STUDIO_API_BASE = "http://127.0.0.1:1234"
 
 # --- Step 1: Fetch loaded models ---
 def get_loaded_models():
@@ -10,7 +10,7 @@ def get_loaded_models():
         res = requests.get(f"{LM_STUDIO_API_BASE}/api/v0/models")
         res.raise_for_status()
         models = res.json()["data"]
-        loaded_llms = [m for m in models if m["state"] == "loaded" and m["type"] == "llm"]
+        loaded_llms = [m for m in models if m["state"] == "loaded"]
         return loaded_llms
     except Exception as e:
         print(f"[Error] Failed to fetch models from LM Studio: {e}")

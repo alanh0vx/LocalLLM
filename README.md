@@ -36,20 +36,23 @@ This project uses **quantized local models** in `.gguf` format.
 | Model ID                 | Path                                                                   |
 |--------------------------|------------------------------------------------------------------------|
 | `gemma-3-4b-it`          | `D:/development/llm-models/.../gemma-3-4b-it-Q4_K_M.gguf`              |
+| `gemma-3-27b-it`          | `D:/development/llm-models/.../gemma-3-27B-it-QAT-Q4_0.gguf`              |
 | `deepseek-r1-qwen3-8b`   | `D:/development/llm-models/.../DeepSeek-R1-0528-Qwen3-8B-Q4_K_M.gguf`  |
 | `Meta-Llama-3.1-8B`      | `D:/development/llm-models/.../Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf` |
 
-Define these in `config.json` like this:
+Define these in `config.json` like this: (rename `config.json.sample` to `config.json`)
 
 ```json
 {
   "models": {
     "gemma-3-4b-it": "D:/development/llm-models/lmstudio-community/gemma-3-4b-it-GGUF/gemma-3-4b-it-Q4_K_M.gguf",
+    "gemma-3-27b-it": "D:/development/llm-models/lmstudio-community/gemma-3-27B-it-qat-GGUF/gemma-3-27B-it-QAT-Q4_0.gguf",
     "deepseek-r1-qwen3-8b": "D:/development/llm-models/lmstudio-community/DeepSeek-R1-0528-Qwen3-8B-GGUF/DeepSeek-R1-0528-Qwen3-8B-Q4_K_M.gguf",
     "Meta-Llama-3.1-8B": "D:/development/llm-models/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
   },
-  "default_model": "Meta-Llama-3.1-8B"
+  "default_model": "gemma-3-27b-it"
 }
+
 ```
 
 ---
@@ -109,7 +112,7 @@ This project can be used to simulate and test:
 ---
 
 ## Local AI Agent with LM Studio API
-This project supports running fully local AI agents using LM Studio, which serves quantized GGUF models through a local OpenAI-compatible API (http://localhost:1234/v1). 
+This project supports running fully local AI agents using LM Studio, which serves quantized GGUF models through a local OpenAI-compatible API (http://127.0.0.1:1234/v1). 
 
 
 In `agent.py`, we use the SmolAgents framework with OpenAIServerModel to connect to LM Studio, allowing users to interact with tools like DuckDuckGoSearchTool and custom logic via a conversational interface. On startup, the script fetches all currently loaded models from the LM Studio API and lets the user select one for inference. The selected model is then used by a CodeAgent to reason and act using both LLM reasoning and real-time tool usage.
