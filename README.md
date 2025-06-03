@@ -31,6 +31,14 @@ For GPU support with `llama-cpp-python`, see [llama-cpp-python build instruction
 
 This project uses **quantized local models** in `.gguf` format.
 
+The models can be downloaded within  [lm studio](https://lmstudio.ai/)
+
+![image](https://github.com/user-attachments/assets/b128be06-d35d-4d00-961b-98d24e4b4788)
+
+![image](https://github.com/user-attachments/assets/84381a28-abac-43fa-ae47-d541fffaae90)
+
+
+
 ### Example Models:
 
 | Model ID                 | Path                                                                   |
